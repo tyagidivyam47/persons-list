@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Avatar, Card} from "antd";
+import { Avatar, Card } from "antd";
 import {
   DeleteFilled,
   EditOutlined,
@@ -29,20 +29,21 @@ const Home = ({ uData }) => {
     // console.log(data);
   }, []);
 
-  const handleOk = (info, id) =>{
+  const handleOk = (info, id) => {
     console.log(info);
     let arr = [];
-    for(let i = 0; i < data.length; i++){
-      if(i === id-1){
-        arr.push(info)
-      }
-      else{
-        arr.push(data[i])
+    const index = data.findIndex((d) => d.id === id);
+
+    for (let i = 0; i < data.length; i++) {
+      if (i === index) {
+        arr.push(info);
+      } else {
+        arr.push(data[i]);
       }
     }
     setData(arr);
     setIsModalOpen(false);
-  }
+  };
 
   const likeClickHandler = (id) => {
     let arr = [];
@@ -80,8 +81,10 @@ const Home = ({ uData }) => {
   };
 
   const modalHandler = (id) => {
-    if(id){
-      setEditProdIndex(id-1);
+    // alert(index)
+    if (id) {
+      const index = data.findIndex((d) => d.id === id);
+      setEditProdIndex(index);
     }
     setIsModalOpen(!isModalOpen);
     // console.log(data[editProdIndex]);
@@ -105,7 +108,9 @@ const Home = ({ uData }) => {
                   }}
                 >
                   <Avatar
-                    src={`https://avatars.dicebear.com/v2/avataaars/${user.id+1}ass.svg?options[mood][]=happy`}
+                    src={`https://avatars.dicebear.com/v2/avataaars/${
+                      user.id + 1
+                    }ass.svg?options[mood][]=happy`}
                     size={150}
                     style={{ height: "100%", borderRadius: "0" }}
                   />
@@ -119,7 +124,7 @@ const Home = ({ uData }) => {
                         style={{ color: "red", fontSize: "17px" }}
                       />,
                       <EditOutlined
-                        onClick={()=>modalHandler(user.id)}
+                        onClick={() => modalHandler(user.id)}
                         style={{ fontSize: "17px" }}
                       />,
                       <DeleteFilled
@@ -133,7 +138,7 @@ const Home = ({ uData }) => {
                         style={{ color: "red", fontSize: "17px" }}
                       />,
                       <EditOutlined
-                        onClick={()=>modalHandler(user.id)}
+                        onClick={() => modalHandler(user.id)}
                         style={{ fontSize: "17px" }}
                       />,
                       <DeleteFilled
@@ -145,7 +150,10 @@ const Home = ({ uData }) => {
             >
               <div className="info" id={user.id}>
                 <p style={{ fontWeight: "600" }}>{user.name}</p>
-                <div id={user.id} style={{ fontSize: "13px", fontWeight: "350" }}>
+                <div
+                  id={user.id}
+                  style={{ fontSize: "13px", fontWeight: "350" }}
+                >
                   <p>
                     <MailOutlined />
                     <span style={{ paddingLeft: "9px" }}>{user.email}</span>
@@ -162,11 +170,15 @@ const Home = ({ uData }) => {
                   </p>
                 </div>
               </div>
-              {isModalOpen && <EditModal isOpen={isModalOpen} user={data[editProdIndex]} onCancel={modalHandler} onOk={handleOk} />}
+              {isModalOpen && (
+                <EditModal
+                  isOpen={isModalOpen}
+                  user={data[editProdIndex]}
+                  onCancel={modalHandler}
+                  onOk={handleOk}
+                />
+              )}
             </Card>
-
-            
-
           </div>
         ))}
     </div>
