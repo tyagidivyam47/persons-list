@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.homePage{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 1px;
+}
+
+.card{
+  /* width: 315px; */
+  margin: 6px;
+  border: 1px solid #ebeaea;
+}
+
+.info{
+  max-height: 85px;
+  text-align: left;
+}
+
+@media screen and (max-width: 1200px) {
+  .homePage{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 1px;
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  .homePage{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 1px;
+  } 
+}
